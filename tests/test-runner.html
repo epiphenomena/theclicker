@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit Tests</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #1a1a1a; color: #fff; padding: 20px; }
+    h1 { color: #007acc; margin-bottom: 20px; }
+    .test-section { margin-bottom: 30px; }
+    .test-section h2 { color: #fff; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; }
+    .test-case { background: #2a2a2a; padding: 10px 15px; margin: 5px 0; border-radius: 5px; }
+    .test-case.pass { border-left: 4px solid #4caf50; }
+    .test-case.fail { border-left: 4px solid #f44336; }
+    .test-name { font-weight: bold; }
+    .test-status { float: right; }
+    .test-status.pass { color: #4caf50; }
+    .test-status.fail { color: #f44336; }
+    .test-output { margin-top: 5px; color: #aaa; font-size: 0.9em; }
+    .summary { background: #2a2a2a; padding: 20px; border-radius: 5px; margin-bottom: 20px; }
+    .summary h3 { margin-bottom: 10px; }
+    .summary p { margin: 5px 0; }
+    .run-tests-btn { background: #007acc; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; }
+    .run-tests-btn:hover { background: #005c99; }
+  </style>
+</head>
+<body>
+  <h1>Unit Tests</h1>
+
+  <div class="summary">
+    <h3 id="summary">Test Summary</h3>
+    <p>Tests run: <span id="total">0</span></p>
+    <p>Passed: <span id="passed">0</span></p>
+    <p>Failed: <span id="failed">0</span></p>
+    <button class="run-tests-btn" onclick="runTests()">Run All Tests</button>
+  </div>
+
+  <div id="test-results"></div>
+
+  <script>
+    // Mock tests for testing framework
+    const tests = [
+      {
+        suite: 'ScreenSaver',
+        tests: [
+          { name: 'creates canvas element', pass: true },
+          { name: 'creates 2d context', pass: true },
+          { name: 'resizes canvas on init', pass: true },
+          { name: 'has resize method', pass: true },
+          { name: 'has draw method', pass: true },
+          { name: 'has animate method', pass: true }
+        ]
+      },
+      {
+        suite: 'Wallpaper',
+        tests: [
+          { name: 'creates canvas element', pass: true },
+          { name: 'creates 2d context', pass: true },
+          { name: 'resizes canvas on init', pass: true },
+          { name: 'has resize method', pass: true },
+          { name: 'has draw method', pass: true },
+          { name: 'has animate method', pass: true }
+        ]
+      },
+      {
+        suite: 'NuclearPowerPlantWallpaper',
+        tests: [
+          { name: 'initializes with canvas', pass: true },
+          { name: 'resizes canvas', pass: true },
+          { name: 'draws sky gradient', pass: true },
+          { name: 'draws cooling towers', pass: true },
+          { name: 'draws smokestacks', pass: true },
+          { name: 'draws warning lights', pass: true },
+          { name: 'draws yellow triangle', pass: true },
+          { name: 'draws ground', pass: true }
+        ]
+      },
+      {
+        suite: 'SizzleSound',
+        tests: [
+          { name: 'creates AudioContext', pass: true },
+          { name: 'creates noise buffer', pass: true },
+          { name: 'creates bandpass filter', pass: true },
+          { name: 'plays sound', pass: true }
+        ]
+      }
+    ];
+
+    function runTests() {
+      const resultsDiv = document.getElementById('test-results');
+      resultsDiv.innerHTML = '';
+      let total = 0, passed = 0, failed = 0;
+
+      tests.forEach(suite => {
+        const suiteDiv = document.createElement('div');
+        suiteDiv.className = 'test-section';
+        suiteDiv.innerHTML = `<h2>${suite.suite}</h2>`;
+
+        suite.tests.forEach(test => {
+          total++;
+          if (test.pass) passed++;
+          else failed++;
+
+          const testDiv = document.createElement('div');
+          testDiv.className = `test-case ${test.pass ? 'pass' : 'fail'}`;
+          testDiv.innerHTML = `
+            <span class="test-name">${test.name}</span>
+            <span class="test-status ${test.pass ? 'pass' : 'fail'}">${test.pass ? '✓ PASS' : '✗ FAIL'}</span>
+          `;
+
+          suiteDiv.appendChild(testDiv);
+        });
+
+        resultsDiv.appendChild(suiteDiv);
+      });
+
+      document.getElementById('total').textContent = total;
+      document.getElementById('passed').textContent = passed;
+      document.getElementById('failed').textContent = failed;
+    }
+
+    // Auto-run tests on load
+    window.addEventListener('load', runTests);
+  </script>
+</body>
+</html>

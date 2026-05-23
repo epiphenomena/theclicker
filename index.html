@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The CLICKER</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="loading-screen">
+        <div id="loading-text-container">
+            <span id="loading-the">THE</span>
+            <span id="loading-clicker">CLICKER</span>
+        </div>
+        <div id="loading-skip-hint">Click to Skip</div>
+    </div>
+
+    <div id="wallpaper-monitor" class="hidden"></div>
+
+    <div id="ui-left">
+        <div id="counter">0</div>
+        <div id="rebirth-count">Rebirths: 0</div>
+        <input type="number" id="cheat-bar" class="hidden" placeholder="Set Clicks...">
+        
+        <div id="rubiks-controls" class="hidden">
+            <button class="cube-btn" data-pattern="solved">Solved</button>
+            <button class="cube-btn" data-pattern="checker">Checker</button>
+            <button class="cube-btn" data-pattern="cross">Cross</button>
+            <button class="cube-btn" data-pattern="dot">Dot</button>
+            <button class="cube-btn" data-pattern="chaos">Chaos</button>
+            <div id="checker-colors">
+                <input type="color" id="cube-color-1" value="#ffffff">
+                <input type="color" id="cube-color-2" value="#ff0000">
+            </div>
+        </div>
+
+        <div id="computer-controls" class="hidden">
+            <button class="comp-btn" data-saver="matrix">Matrix</button>
+            <button class="comp-btn" data-saver="bsod">BSOD</button>
+            <button class="comp-btn" data-saver="static">Static</button>
+            <button class="comp-btn" data-saver="retro">Retro</button>
+            <button class="comp-btn" data-saver="space">Space</button>
+            <button class="comp-btn" data-saver="dvd">DVD</button>
+            <button class="comp-btn" data-saver="night">Night</button>
+            <button class="comp-btn" data-saver="simpsons">Simpsons</button>
+            <button class="comp-btn" data-saver="toaster">Toaster</button>
+            
+        </div>
+    </div>
+
+    <div id="ui-bottom-left">
+        <button id="open-skins-btn">Skins</button>
+        <button id="open-wallpapers-btn">Wallpapers</button>
+        <button id="open-sounds-btn">Sounds</button>
+        <button id="open-auras-btn">Auras</button>
+        <div id="boardgame-entry" class="hidden">
+            <button id="open-board-btn">🎲 Play Boardgame</button>
+        </div>
+    </div>
+
+    <div id="upgrade-container">
+        <!-- Upgrade buttons will be generated here -->
+        <div id="rebirth-row">
+            <button id="pause-btn">Pause</button>
+            <button id="rebirth-btn" class="hidden">Rebirth</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="aura-effect"></div>
+        <div id="circle">
+            <div id="circle-icon"></div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="skin-modal" class="hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="shop-title">Shop</h2>
+                <button id="close-skins-btn">&times;</button>
+            </div>
+            <div id="skin-list" class="tab-pane hidden"></div>
+            <div id="wallpaper-list" class="tab-pane hidden"></div>
+            <div id="sound-list" class="tab-pane hidden"></div>
+            <div id="aura-list" class="tab-pane hidden"></div>
+        </div>
+    </div>
+
+    <div id="boardgame-modal" class="hidden">
+        <div class="modal-content board-content">
+            <div class="modal-header">
+                <h2>Dice Game</h2>
+                <button id="close-board-btn">&times;</button>
+            </div>
+            <div id="board-arena">
+                <div id="game-board">
+                    <div id="player-token"></div>
+                </div>
+                <div id="dice-area">
+                    <div id="dice">?</div>
+                    <button id="roll-btn">Roll Dice (100k)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="battle-overlay" class="hidden">
+        <div id="battle-arena">
+            <h2 id="npc-name">Enemy Encounter!</h2>
+            <div id="hp-container">
+                <div id="hp-bar"></div>
+                <div id="hp-text">0 / 0</div>
+            </div>
+            <div id="battle-timer">Time Left: 30s</div>
+        </div>
+    </div>
+
+    <!-- Pause Overlay with Newton's Cradle -->
+    <div id="pause-overlay" class="hidden">
+        <div class="pause-content">
+            <h1 class="pause-title">Game Paused</h1>
+            <div id="pause-clock" class="pause-clock">00:00:00 AM</div>
+            <div class="newtons-cradle">
+                <div class="cradle-bar"></div>
+                <div class="cradle-strings">
+                    <div class="cradle-ball-container ball-1">
+                        <div class="cradle-string"></div>
+                        <div class="cradle-ball"></div>
+                    </div>
+                    <div class="cradle-ball-container ball-2">
+                        <div class="cradle-string"></div>
+                        <div class="cradle-ball"></div>
+                    </div>
+                    <div class="cradle-ball-container ball-3">
+                        <div class="cradle-string"></div>
+                        <div class="cradle-ball"></div>
+                    </div>
+                    <div class="cradle-ball-container ball-4">
+                        <div class="cradle-string"></div>
+                        <div class="cradle-ball"></div>
+                    </div>
+                    <div class="cradle-ball-container ball-5">
+                        <div class="cradle-string"></div>
+                        <div class="cradle-ball"></div>
+                    </div>
+                </div>
+            </div>
+            <button id="overlay-resume-btn">Resume Game</button>
+            <div class="pause-options">
+                <label class="switch-container">
+                    <input type="checkbox" id="toggle-clock-cb" checked>
+                    <span class="switch-text">Show Clock</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
