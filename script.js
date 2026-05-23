@@ -1210,27 +1210,27 @@ const UpgradeSystem = {
     initButtons() {
         this.upgradeContainer.innerHTML = '';
         
-        // Manual upgrades
-        Game.manualUpgrades.forEach(up => {
+        // Manual upgrades - Only show the current level
+        if (Game.manualLevel < Game.manualUpgrades.length) {
+            const up = Game.manualUpgrades[Game.manualLevel];
             const btn = document.createElement('button');
             btn.id = up.id;
             const currentCost = Utils.getCurrentUpgradeCost(up.cost);
             btn.innerText = `${up.label} (Cost: ${Utils.formatNumber(currentCost)})`;
-            btn.classList.add('hidden');
             btn.addEventListener('click', () => this.buyManualUpgrade(up, currentCost));
             this.upgradeContainer.appendChild(btn);
-        });
+        }
         
-        // Auto upgrades
-        Game.autoUpgrades.forEach(up => {
+        // Auto upgrades - Only show the current level
+        if (Game.autoLevel < Game.autoUpgrades.length) {
+            const up = Game.autoUpgrades[Game.autoLevel];
             const btn = document.createElement('button');
             btn.id = up.id;
             const currentCost = Utils.getCurrentUpgradeCost(up.cost);
             btn.innerText = `${up.label} (Cost: ${Utils.formatNumber(currentCost)})`;
-            btn.classList.add('hidden');
             btn.addEventListener('click', () => this.buyAutoUpgrade(up, currentCost));
             this.upgradeContainer.appendChild(btn);
-        });
+        }
         
         this.upgradeContainer.appendChild(this.rebirthRow);
     },
@@ -1240,6 +1240,7 @@ const UpgradeSystem = {
             Game.count -= cost;
             Game.clickValue = upgrade.value;
             Game.manualLevel++;
+            this.initButtons(); // Show the next upgrade
             Utils.updateDisplay();
         }
     },
@@ -1254,6 +1255,7 @@ const UpgradeSystem = {
                 this.startAutoClicker();
             }
             
+            this.initButtons(); // Show the next upgrade
             Utils.updateDisplay();
         }
     },
@@ -1508,42 +1510,26 @@ Utils.updateDisplay = function() {
     }
     
     // Manual upgrades
-    Game.manualUpgrades.forEach((upgrade, index) => {
+    if (Game.manualLevel < Game.manualUpgrades.length) {
+        const upgrade = Game.manualUpgrades[Game.manualLevel];
         const btn = document.getElementById(upgrade.id);
         if (btn) {
             const currentCost = Utils.getCurrentUpgradeCost(upgrade.cost);
-            if (index <= Game.manualLevel) {
-                btn.classList.remove('hidden');
-                btn.disabled = Game.count < currentCost || index < Game.manualLevel || Game.isPaused;
-                if (index < Game.manualLevel) {
-                    btn.innerText = "Purchased!";
-                } else {
-                    btn.innerText = `${upgrade.label} (Cost: ${Utils.formatNumber(currentCost)})`;
-                }
-            } else {
-                btn.classList.add('hidden');
-            }
+            btn.disabled = Game.count < currentCost || Game.isPaused;
+            btn.innerText = `${upgrade.label} (Cost: ${Utils.formatNumber(currentCost)})`;
         }
-    });
+    }
     
     // Auto upgrades
-    Game.autoUpgrades.forEach((upgrade, index) => {
+    if (Game.autoLevel < Game.autoUpgrades.length) {
+        const upgrade = Game.autoUpgrades[Game.autoLevel];
         const btn = document.getElementById(upgrade.id);
         if (btn) {
             const currentCost = Utils.getCurrentUpgradeCost(upgrade.cost);
-            if (index <= Game.autoLevel) {
-                btn.classList.remove('hidden');
-                btn.disabled = Game.count < currentCost || index < Game.autoLevel || Game.isPaused;
-                if (index < Game.autoLevel) {
-                    btn.innerText = "Purchased!";
-                } else {
-                    btn.innerText = `${upgrade.label} (Cost: ${Utils.formatNumber(currentCost)})`;
-                }
-            } else {
-                btn.classList.add('hidden');
-            }
+            btn.disabled = Game.count < currentCost || Game.isPaused;
+            btn.innerText = `${upgrade.label} (Cost: ${Utils.formatNumber(currentCost)})`;
         }
-    });
+    }
     
     // Rebirth button
     const allManualPurchased = Game.manualLevel === Game.manualUpgrades.length;
@@ -1556,11 +1542,7 @@ Utils.updateDisplay = function() {
     }
     
     // Update shop button states
-    document.querySelectorAll('.buy-btn, .equip-btn').forEach(btn => {
-        if (btn.onclick) {
-            btn.disabled = Game.count < 0 || Game.isPaused;
-        }
-    });
+    // Removed broken global selector loop; states are now handled within their respective render functions
 };
 
 // ============================================
