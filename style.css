@@ -1808,3 +1808,157 @@ body {
     color: rgba(255, 255, 255, 0.85);
     letter-spacing: 0.5px;
 }
+
+/* ============================================
+   MOBILE RESPONSIVENESS
+   ============================================ */
+
+@media (max-width: 768px) {
+    #loading-text-container {
+        font-size: 3rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #ui-left {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        align-items: center;
+    }
+
+    #counter {
+        font-size: 1.5rem;
+        padding: 8px 15px;
+        width: fit-content;
+    }
+
+    #rebirth-count {
+        font-size: 1rem;
+        padding: 4px 10px;
+    }
+
+    #ui-bottom-left {
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    #open-skins-btn, #open-wallpapers-btn, #open-sounds-btn, #open-auras-btn, #open-board-btn {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+        width: calc(50% - 10px);
+        min-width: 120px;
+    }
+
+    #boardgame-entry {
+        margin-left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    #open-board-btn {
+        width: 100%;
+    }
+
+    #upgrade-container {
+        top: auto;
+        bottom: 140px;
+        right: 10px;
+        left: 10px;
+        max-height: 30vh;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 10px;
+        justify-content: flex-start;
+        align-items: flex-end;
+    }
+
+    #upgrade-btn, #upgrade-btn-2, #upgrade-btn-3, #upgrade-btn-4, #upgrade-btn-5, #upgrade-btn-6, #upgrade-btn-7, #upgrade-btn-8, #upgrade-btn-9, 
+    [id^="upgrade-btn-"], #auto-btn-1, #auto-btn-2, #auto-btn-3, #auto-btn-4, #auto-btn-5, #auto-btn-6, #auto-btn-7, #auto-btn-8, #auto-btn-9, [id^="auto-btn-"], #rebirth-btn {
+        width: 160px;
+        font-size: 0.8rem;
+        padding: 10px;
+        flex-shrink: 0;
+    }
+
+    #rebirth-row {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        width: auto;
+    }
+
+    #pause-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .tab-pane {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 10px;
+    }
+
+    #game-board {
+        grid-template-columns: repeat(5, 50px);
+        grid-template-rows: repeat(5, 50px);
+        gap: 5px;
+        padding: 10px;
+    }
+
+    .board-space {
+        width: 50px;
+        height: 50px;
+        font-size: 0.6rem;
+    }
+
+    #player-token {
+        width: 25px;
+        height: 25px;
+    }
+
+    #dice {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+
+    #battle-arena {
+        width: 90%;
+        padding: 15px;
+    }
+
+    #hp-container {
+        width: 100%;
+    }
+
+    .pause-clock {
+        font-size: 1.8rem;
+        min-width: 160px;
+    }
+
+    .cradle-bar {
+        width: 180px;
+    }
+
+    .cradle-ball-container {
+        width: 30px;
+    }
+
+    .cradle-ball {
+        width: 30px;
+        height: 30px;
+    }
+}
