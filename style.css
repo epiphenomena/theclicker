@@ -24,13 +24,22 @@
 
 #loading-skip-hint {
     position: absolute;
-    bottom: 30px;
+    bottom: 40px;
     color: rgba(255, 255, 255, 0.4);
     font-family: inherit;
     font-size: 1rem;
     letter-spacing: 2px;
     text-transform: uppercase;
     animation: pulse 2s infinite;
+}
+
+#loading-footer {
+    position: absolute;
+    bottom: 15px;
+    color: rgba(255, 255, 255, 0.3);
+    font-family: inherit;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
 }
 
 @keyframes pulse {
@@ -1814,6 +1823,11 @@ body {
    ============================================ */
 
 @media (max-width: 768px) {
+    body {
+        padding-top: 80px;
+        box-sizing: border-box;
+    }
+
     #loading-text-container {
         font-size: 3rem;
         flex-direction: column;
@@ -1821,7 +1835,7 @@ body {
     }
 
     #ui-left {
-        top: 10px;
+        top: 80px;
         left: 10px;
         right: 10px;
         align-items: center;
@@ -1890,7 +1904,7 @@ body {
 
     #rebirth-row {
         position: fixed;
-        top: 10px;
+        top: 80px;
         right: 10px;
         width: auto;
     }
